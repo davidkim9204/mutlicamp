@@ -1,6 +1,7 @@
 package day10_designPattern4_interface;
 
 public class Taekwon extends Robot{
+	//private PunchAttack attack;
 	private Attack attack;
 	private Move move;
 	public Taekwon() {

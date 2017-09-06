@@ -15,5 +15,7 @@ public class Test {
 		atom.setAttack(pa);
 		atom.setMove(wm);
 		
+		
+		taekwon.fight();
 	}
 }

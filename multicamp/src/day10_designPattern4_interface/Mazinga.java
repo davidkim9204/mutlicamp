@@ -1,6 +1,7 @@
 package day10_designPattern4_interface;
 
 public class Mazinga extends Robot{
+	//private MissileAttack attack;
 	private Attack attack;
 	private Move move;
 	public Mazinga(){
