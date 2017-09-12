@@ -26,6 +26,7 @@ public class ReverseInt {
 		for (int i=0;i<array.length;i++) {
 			Sresult += Integer.toString(array[i]);
 		}
+		System.out.println();
 		result = Integer.parseInt(Sresult);
 		return result;
 	}
