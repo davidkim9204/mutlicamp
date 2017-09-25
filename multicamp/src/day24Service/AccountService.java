@@ -2,8 +2,11 @@ package day24Service;
 
 import java.util.List;
 
+
 import day24Dao.AccountDao;
 import day24Model.Account;
+import day24Exception.BalanceNotEnoughException;
+import day24Exception.AccountNotFoundException;
 
 public class AccountService {
 	
@@ -24,6 +27,8 @@ public class AccountService {
 	
 	public void showAccount(String aNum){
 		Account account = aDao.selectAccount(aNum);
+		if(account == null)
+			throw new AccountNotFoundException();
 		account.setaNum(account.getaNum());
 		account.setOwner(account.getOwner());
 		account.setBalance(account.getBalance());
@@ -39,7 +44,8 @@ public class AccountService {
 	
 	public void depositBalance(String aNum, int amount){
 		Account account = aDao.selectAccount(aNum);
-		
+		if(account == null)
+			throw new AccountNotFoundException();
 		if(account.getaNum().equals(aNum)){
 			account.setBalance(account.getBalance() + amount);
 			aDao.updateAccount(account);
@@ -49,7 +55,8 @@ public class AccountService {
 	
 	public void withdrawBalance(String aNum, int amount){
 		Account account = aDao.selectAccount(aNum);
-		
+		if(account == null)
+			throw new AccountNotFoundException();
 		if(account.getaNum().equals(aNum)){
 			account.setBalance(account.getBalance() - amount);
 			aDao.updateAccount(account);
@@ -58,17 +65,9 @@ public class AccountService {
 	}
 	
 	public void transferBalance(String aNum1, String aNum2, int amount){
-		Account senderAccount = aDao.selectAccount(aNum1);
-		Account receiverAccount = aDao.selectAccount(aNum2);
+		withdrawBalance(aNum1, amount);
+		depositBalance(aNum2, amount);
 		
-		if(senderAccount.getaNum().equals(aNum1) && receiverAccount.getaNum().equals(aNum2)
-				&& senderAccount.getBalance()>0){
-			senderAccount.setBalance(senderAccount.getBalance()-amount);
-			receiverAccount.setBalance(receiverAccount.getBalance()+amount);
-			aDao.updateAccount(senderAccount);
-			aDao.updateAccount(receiverAccount);
-
-		}
 		
 	}
 	
