@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+	crossorigin="anonymous"></script>
+<style type="text/css">
+.reverse {
+	background: black;
+	color: white;
+}
+
+a{
+	margin: 5px; padding: 5px; border: 3px solid black;
+}
+h1{
+	margin: 5px; padding: 5px; border: 3px solid black;
+}
+</style>
+<script type="text/javascript">
+	$(document).ready(function() {
+		// 		var h1 = '<h1> Header1 </h1>';
+		// 		var h2 = '<h2> Header2 </h2>';
+		// 		$('body').append(h1, h2, h1, h2);
+
+
+
+		// 		var content = [
+		// 			{name: 'a', region: 'seoul'},
+		// 			{name: 'b', region: 'busan'},
+		// 			{name: 'c', region: 'daegu'}
+		// 		]
+
+		// 		$('div').append(function(index){
+		// 			var item = content[index]
+		// 			var output ='';
+		// 			output += '<h1>' + item.name +'</h1>'
+		// 			output += '<h2>' + item.region +'</h2>'
+		// 			return output
+		// 		})
+
+
+		// 		$('img').css('width',250)
+		// 		setInterval(function(){
+		// 			$('img').first().appendTo('body')
+		// 		}, 2000)
+
+		var onClick = function() {
+			alert('??')
+		}
+
+		$('h1').on('click', onClick)
+
+		$('h1').on({
+			mouseenter : function() {
+				$(this).addClass('reverse')
+			},
+			mouseleave : function() {
+				$(this).removeClass('reverse')
+			}
+		})
+
+		//$('h1').off()
+		//$('h1').off('click')
+		$('h1').off('click', onClick)
+
+		// 	$('h1').hover(function(){
+		// 		$(this).addClass('reverse') 
+		// 		}, function(){
+		// 			$(this).removeClass('reverse')
+		// 		})
+		// 		$(this).toggleClass('reverse')
+
+		// 	})
+
+		// 		$('div').click(function(){
+		// 			var header = $('h1',this).text()
+		// 			//var header = $(this).find('h1').text()
+		// 			//var header = $('h1').text()
+		// 			var paragraph = $('p',this).text()
+
+		// 			alert(header+ paragraph)
+		// 		})
+
+// 		var canvas = document.getElementById('canvas')
+// 		var context = canvas.getContext('2d')
+
+// 		$(canvas).on({
+// 			mousedown : function(event) {
+// 				var position = $(this).offset()
+// 				var x = event.pageX - position.left
+// 				var y = event.pageY - position.top
+
+// 				context.beginPath();
+// 				context.moveTo(x, y)
+// 			},
+// 			mouseup : function(event) {
+// 				var position = $(this).offset()
+// 				var x = event.pageX - position.left
+// 				var y = event.pageY - position.top
+
+// 				context.lineTo(x, y)
+// 				context.stroke();
+// 			}
+// 		})
+
+		$('a').click(function(event){
+			$(this).css('background-color','blue')
+// 			event.preventDefault()
+// 			event.stopPropagation()
+			return false
+		})
+		
+		
+		$('h1').click(function(event){
+			$(this).css('background-color','red')
+		})
+
+	})
+</script>
+</head>
+<body>
+	<!-- 	<img src="images/ball.png" /> -->
+	<!-- 	<img src="images/green_king.png" /> -->
+	<!-- 	<img src="images/ship.png" /> -->
+
+	<!-- 	<h1>Header - 0</h1> -->
+	<!-- 	<h1>Header - 1</h1> -->
+	<!-- 	<h1>Header - 2</h1> -->
+
+	<!-- 	<div> -->
+	<!-- 		<h1>Header 1</h1> -->
+	<!-- 		<p>Paragraph1</p> -->
+	<!-- 	</div> -->
+
+	<!-- 	<div> -->
+	<!-- 		<h1>Header 2</h1> -->
+	<!-- 		<p>Paragraph2</p> -->
+	<!-- 	</div> -->
+
+	<!-- 	<div> -->
+	<!-- 		<h1>Header 3</h1> -->
+	<!-- 		<p>Paragraph3</p> -->
+	<!-- 	</div> -->
+
+<!-- 	<canvas id="canvas" width="700" height="400" -->
+<!-- 		style="border: 3px solid black"> -->
+		
+<!-- 	</canvas> -->
+
+	<h1><a href="naver.com">naver</a></h1>
+	
+	
+
+	
+
+</body>
+</html>

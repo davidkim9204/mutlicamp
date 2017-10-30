@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	window.onload = function(){
+		var hello = document.getElementById('hello');
+		hello.onclick = function(e){
+// 			alert(this);
+			this.style.color='orange';
+			this.style.background='hotpink';
+			alert(e.x + ',' + e.y);
+		};
+		
+		
+		//hello.onclick();
+	};
+</script>
+</head>
+<body>
+	<h1 id="hello">나잡아봐라ㅋㅋ</h1>
+</body>
+</html>

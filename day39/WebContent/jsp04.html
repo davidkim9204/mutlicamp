@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	.my{
+		border:3px solid black;
+	}
+</style>
+</head>
+<body>
+	<div class="my" onclick="alert('here is outer');">
+		<div class="my" onclick="alert('here is inner');">
+			<h1 class="my"  onclick="alert('here is h1'); event.stopPropagation();">
+				<p class="my"  onclick="alert('here is p');">Hello World</p>
+			</h1>
+		</div>
+	</div>
+</body>
+</html>

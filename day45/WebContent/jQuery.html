@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		// jQuery ajax api를 이용하면 훨씬 편리
+		$("#btn").on("click", function() {
+			//$('#result').load('hello.do')			
+		})
+
+		$("#btn").on("click", function() {
+			//$('#result').load('people.json')
+
+			// 목적지, 응답을 받았을 때 수행 할 함수. 함수는 매개변수로 응답이 들어옴.
+			/* 	$.getJSON('people.json',function(data){
+					alert(data.name)
+					alert(data.age)
+					alert(data.email)
+					
+				}) 
+			*/
+			/* 			$.ajax({
+							url : 'students.xml',
+							//dataType : 'xml',
+							success : function(data) {
+								$(data).find('student').each(function(){
+									//alert(data)
+									var name=$(this).find('name').text()
+									var age=$(this).find('age').text();
+									var tr = $('<tr>')
+									$('<td>').text(name).appendTo(tr)
+									$('<td>').text(age).appendTo(tr)
+									tr.appendTo('#result_table')
+								})
+							},
+							error : function() {
+								alert('fail')
+							}
+						})
+			 */
+			$.ajax({
+				url : 'people.json',
+				dataType : 'json',
+				success : function(data) {
+					//alert(JSON.stringify(data.people.age))
+					$.each(data.people, function(index,item){
+						var tr = $('<tr>')
+						var name = item.name
+						var age = item.age
+						$('<td>').text(name).appendTo(tr)
+						$('<td>').text(age).appendTo(tr)
+						//alert(data.people[i].name+":"+data.people[i].age)
+						tr.appendTo('#result_table')
+					})
+					
+				/* 	
+					for(var i=0;i<data.people.length;i++){
+						var tr = $('<tr>')
+						var name = data.people[i].name
+						var age = data.people[i].age
+						$('<td>').text(name).appendTo(tr)
+						$('<td>').text(age).appendTo(tr)
+						//alert(data.people[i].name+":"+data.people[i].age)
+						tr.appendTo('#result_table')
+					}
+				*/
+					
+				},
+				error : function() {
+					alert('fail')
+				}
+			})
+
+		})
+
+		// 		$("#btn").on("click",function(){
+		// 			// 1. ajax를 담당하는 객체 생성
+		// 			var request = new XMLHttpRequest()
+		// 			// 2. 목적지와 보낼 데이터를 세팅
+		// 			request.open('GET','hello.do')
+		// 			// 3. 응답을받았을 때 수행할 함수를 정의
+		// 			request.onreadystatechange = function(){
+		// 				if(request.readyState == 4 && request.status == 200 ){
+		// 					$('#result').html(request.responseText)
+		// 				}
+		// 			}
+		// 			// 4. 전송
+		// 			request.send()
+		// 		})
+
+	})
+</script>
+</head>
+<body>
+	<input type="button" id="btn" value="push">
+	<div id="result">
+		<table id="result_table">
+			<tr>
+				<th>이름</th>
+				<th>나이</th>
+			</tr>
+
+		</table>
+	</div>
+</body>
+</html>

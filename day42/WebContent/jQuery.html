@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+	crossorigin="anonymous"></script>
+
+<style type="text/css">
+	.item{
+		background-color: pink;
+	}
+</style>
+
+	
+<script type="text/javascript">
+// 	$(document).ready(function(){
+// 		setTimeout(function() {
+// 			$('h1').addClass('item')
+// 		}, 1000)
+// 	})
+
+// 	$(document).ready(function(){ 
+// 		setInterval(function() {
+// 			$('h1').toggleClass('item')
+// 		}, 1000)
+// 	})
+
+// $(document).ready(function(){
+// 	var src = ['images/ball.png','images/bg.jpg']
+// 	var i=0
+// 	//alert(src)
+// 	setInterval(function() {
+// 			$('img').attr('src',src[i++%2])
+// 		}, 2000)
+// })
+r
+// $(document).ready(function(){
+// 	var html=$('h1').text()
+// 	alert(html)
+// })
+
+$(document).ready(function(){
+	
+	setInterval(function() {
+		var name= $('#name').val()
+		var age = $('#age').val()
+		var gender = $('.gender:checked').val()
+		var hobbies = []
+		var hobby = $('.hobby:checked').each(function(){
+			hobbies.push($(this).val())
+	})
+		
+		var result = ''
+		result += name+'<br>'
+		result += age+'<br>'
+		result += gender+'<br>'
+		result += hobbies+'<br>'
+		//alert(name)
+		$("#result").html(result)
+		
+	}, 2000)
+})
+	
+</script>
+
+</head>
+<body>
+<!-- 	<h1 >Header-0</h1> -->
+<!-- 	<h1 >Header-1</h1> -->
+<!-- 	<h1 >Header-2</h1> -->
+
+<!-- 	<img src = "images/ball.png" id="ball"> -->
+
+<div id="div">
+	이름: <input type="text" id="name"> <br>
+	나이: <input type="text" id="age">	<br>
+	성별: 
+	<input type ="radio" class="gender" name=gender  value="남">남  
+	<input type ="radio" class="gender" name=gender value="여">여  <br>
+	
+	취미: <input type="checkbox" class="hobby" value="농구"> 농구
+		<input type="checkbox" class="hobby"  value="야구"> 야구
+		<input type="checkbox" class="hobby" value="게임" checked="checked"> 게임 <br>
+</div>
+
+<div id=result>
+
+</div>
+
+</body>
+</html>

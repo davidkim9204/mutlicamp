@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+	/* $(document).ready(function() {
+		$('#btn').on('click', function() {
+			$.ajax({
+				url : 'hello.do',
+				data : {
+					param1 : 'hello',
+					param2 : 'world'
+				},
+				type : 'get',
+				success : function(data) {
+					alert(data)
+				}
+			})
+		})
+	}) */
+	$(document).ready(function() {
+		$('#btn').on('click', function() {
+			$.ajax({
+				url : 'hello.do',
+				type : 'POST',
+				data : $('#my_form').serialize(),
+				success : function(data) {
+					alert(data)
+				}
+			})
+		})
+	})
+</script>
+</head>
+<body>
+	<input type="button" id="btn" value="push">
+
+	<form id="my_form">
+		이름 : <input name="name"><br> 
+		나이 : <input name="age">
+	</form>
+
+
+
+</body>
+</html>

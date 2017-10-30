@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+
+   // 생성자
+
+   // hitTest (우리편 미사일, 상대편)
+
+   function hitTest(me, target) {
+      var a = me.x // → a
+      var b = me.y //→  b
+      var c = me.x + me.width // → c
+      var d = me.y + me.height //→  d
+      var e = target.x //→  e
+      var f = target.y //→  f
+      var g = target.x + target.width //→  g
+      var h = target.y + target.height //→  h
+
+      if (c >= e && a <= g && b <= h && d >= f) {
+
+         panel.removeChild(me.span);
+         var myIdx = Bullets.indexOf(me);
+         Bullets.splice(myIdx, 1);
+
+         panel.removeChild(target.span);
+         var myIdx = Enermys.indexOf(target);
+         Enermys.splice(myIdx, 1);
+      }
+   }
+   // hitTest (상대편 미사일, 우리편)
+   function hitTestE(me, target) {
+      var a = me.x // → a
+      var b = me.y //→  b
+      var c = me.x + me.width // → c
+      var d = me.y + me.height //→  d
+      var e = target.x //→  e
+      var f = target.y //→  f
+      var g = target.x + target.width //→  g
+      var h = target.y + target.height //→  h
+
+      if (c >= e && a <= g && b <= h && d >= f) {
+
+         panel.removeChild(me.span);
+         var myIdx = BulletsE.indexOf(me);
+         BulletsE.splice(myIdx, 1);
+
+         return true;
+      }
+      return false;
+   }
+   
+   // hitTest (상대편 미사일, 우리편)
+   function hitTestI(me, target) {
+      var a = me.x // → a
+      var b = me.y //→  b
+      var c = me.x + me.width // → c
+      var d = me.y + me.height //→  d
+      var e = target.x //→  e
+      var f = target.y //→  f
+      var g = target.x + target.width //→  g
+      var h = target.y + target.height //→  h
+
+      if (c >= e && a <= g && b <= h && d >= f) {
+
+         panel.removeChild(me.span);
+         var myIdx = BulletsI.indexOf(me);
+         BulletsI.splice(myIdx, 1);
+
+         return true;
+      }
+      return false;
+   }
+   
+   
+
+
+   // ship
+   function Ship(panel) {
+      this.ship = document.createElement('span');
+      this.x = 550;
+      this.y = 750;
+      this.width = 32;
+      this.height = 32;
+      
+      this.mode = 1;
+
+      this.ship.style.left = this.x + 'px';
+      this.ship.style.top = this.y + 'px';
+      this.ship.style.width = '32px';
+      this.ship.style.height = '32px';
+      this.ship.style.backgroundImage = 'url(images/ship.png)';
+      this.ship.style.position = 'absolute';
+      panel.appendChild(this.ship);
+
+      this.movex = 0;
+      this.move = function() {
+
+         if (this.x > 20 && this.x < 1050) {
+            this.x += this.movex;
+            this.ship.style.left = this.x + 'px';
+         } else if (this.x <= 20)
+            this.x += 5;
+         else
+            this.x -= 5;
+
+
+      }
+
+
+      // 생명 5주기 만들기
+      //       this.live = function() {
+
+      //          var shipLive = 5;
+      //          if (this.x > 20 && this.x < 1050) {
+      //             this.x += this.movex;
+      //             this.ship.style.left = this.x + 'px';
+      //          } else if (this.x <= 20)
+      //             this.x += 5;
+      //          else
+      //             this.x -= 5;
+
+
+      //       }
+
+
+   } // 쉽 생성자 엔드
+
+
+      
+   // 벌레 생성자
+
+   function Enermy(panel, src, left, top, width, height) {
+      this.span = document.createElement('span');
+      this.x = left;
+      this.y = top;
+      this.width = 32;
+      this.height = 32;
+      this.span.style.left = this.x + 'px';
+      this.span.style.top = this.y + 'px';
+      this.span.style.width = width + 'px';
+      this.span.style.height = height + 'px';
+      this.span.style.backgroundImage = 'url(' + src + ')';
+      this.span.style.position = 'absolute';
+      panel.appendChild(this.span);
+   } // 벌레 생성자 엔드
+
+
+   // 미사일총 생성자 (ship)
+
+   function Bullet(panel, left, top) {
+      
+      
+      this.span = document.createElement('span');
+      this.x = left;
+      this.y = top;
+      this.width = 7;
+      this.height = 17;
+      this.span.style.left = this.x + 'px';
+      this.span.style.top = this.y + 'px';
+      this.span.style.width = this.width + 'px';
+      this.span.style.height = this.height + 'px';
+      this.span.style.backgroundImage = 'url(images/bullet.png)';
+      this.span.style.position = 'absolute';
+      panel.appendChild(this.span);
+
+      // 위로 미사일 발사
+      this.move = function() {
+         this.y -= 5;
+         this.span.style.top = this.y + 'px';
+      }
+
+         
+   } // 미사일총 생성자 엔드
+
+
+   // 미사일총 생성자 (enermy)
+   function BulletE(panel, left, top) {
+      this.span = document.createElement('span');
+      this.x = left;
+      this.y = top;
+      this.width = 7;
+      this.height = 17;
+      this.span.style.left = this.x + 'px';
+      this.span.style.top = this.y + 'px';
+      this.span.style.width = this.width + 'px';
+      this.span.style.height = this.height + 'px';
+      this.span.style.backgroundImage = 'url(images/bullet.png)';
+      this.span.style.position = 'absolute';
+      panel.appendChild(this.span);
+
+
+      // 아래로 미사일 발사
+      this.moveE = function() {
+         this.y += 5;
+         this.span.style.top = this.y + 'px';
+
+      }
+   } // 미사일총 생성자 엔드
+
+
+
+   // 아이템 생성자 (ship)
+
+   function BulletI(panel, left, top) {
+      this.span = document.createElement('span');
+      this.x = left;
+      this.y = top;
+      this.width = 32;
+      this.height = 32;
+      this.span.style.left = this.x + 'px';
+      this.span.style.top = this.y + 'px';
+      this.span.style.width = this.width + 'px';
+      this.span.style.height = this.height + 'px';
+      this.span.style.backgroundImage = 'url(images/ship.png)';
+      this.span.style.position = 'absolute';
+      panel.appendChild(this.span);
+
+      // 위로 미사일 발사
+      this.moveI = function() {
+         this.y += 5;
+         this.span.style.top = this.y + 'px';
+      }
+
+
+   } // 아이템 생성자 엔드
+
+
+
+   // 미사일총 삭제하기 (우리편)
+   function bulletRemover(panel, bullet) {
+      if (bullet.y < 0) {
+         panel.removeChild(bullet.span)
+         var myIdx = Bullets.indexOf(bullet);
+         Bullets.splice(myIdx, 1);
+      }
+   }
+
+   // 미사일총 삭제하기 (상대편)
+   function bulletRemoverE(panel, bullet) {
+      if (bullet.y > 800) {
+         panel.removeChild(bullet.span)
+         var myIdx = BulletsE.indexOf(bullet);
+         BulletsE.splice(myIdx, 1);
+      }
+   }
+
+   // 아이템 떨어지기 (상대편)
+   function bulletRemoverI(panel, bullet) {
+      if (bullet.y > 800) {
+         panel.removeChild(bullet.span)
+         var myIdx = BulletsI.indexOf(bullet);
+         BulletsI.splice(myIdx, 1);
+      }
+   }
+
+
+   // ★ 윈도우 실행
+
+   var ships = []; // 우리편 비행기 
+   var Enermys = [];
+   var Bullets = []; // 우리편 미사일 (배열)
+   var BulletsE = []; // 상대편 미사일 (배열)
+   var BulletsI = []; // 우리편 아이템 (배열)
+
+
+   window.onload = function() {
+
+      var panel = document.getElementById('panel');
+      var ship = new Ship(panel);
+
+      setInterval(function() {
+
+         for (var i = 0; i < 21; i++) {
+            Enermys.push(new Enermy(panel, 'images/green_king.png',
+               30 + (i * 50), 50, 32, 32));
+            Enermys.push(new Enermy(panel, 'images/green_king.png',
+               30 + (i * 50), 50, 32, 32));
+            Enermys.push(new Enermy(panel, 'images/green_king.png',
+               30 + (i * 50), 50, 32, 32));
+
+         }
+      }, 1000 * 60);
+
+      setInterval(function() {
+
+         for (var i = 0; i < 14; i++) {
+            Enermys.push(new Enermy(panel, 'images/blue_king.png',
+               50 + (i * 70), 100, 32, 32));
+            Enermys.push(new Enermy(panel, 'images/blue_king.png',
+               50 + (i * 70), 100, 32, 32));
+            Enermys.push(new Enermy(panel, 'images/blue_king.png',
+               50 + (i * 70), 100, 32, 32));
+
+         }
+      }, 1000 * 40);
+
+
+      setInterval(function() {
+
+         for (var i = 0; i < 9; i++) {
+            Enermys.push(new Enermy(panel, 'images/enermy2.png',
+               100 + (i * 100), 150, 20, 20));
+            Enermys.push(new Enermy(panel, 'images/enermy2.png',
+               100 + (i * 100), 150, 20, 20));
+
+         }
+      }, 1000 * 20);
+
+      setInterval(function() {
+
+         for (var i = 0; i < 7; i++) {
+            Enermys.push(new Enermy(panel, 'images/enermy2.png',
+               200 + (i * 100), 200, 20, 20));
+            Enermys.push(new Enermy(panel, 'images/enermy2.png',
+               200 + (i * 100), 200, 20, 20));
+         }
+      }, 1000 * 10);
+      
+      setInterval(function() {
+
+         for (var i = 0; i < 7; i++) {
+            Enermys.push(new Enermy(panel, 'images/enermy2.png',
+               250 + (i * 100), 200, 20, 20));
+            Enermys.push(new Enermy(panel, 'images/enermy2.png',
+               250 + (i * 100), 200, 20, 20));
+         }
+      }, 1000 * 10);
+
+
+      setInterval(function() {
+
+         for (var i = 0; i < 3; i++) {
+            Enermys.push(new Enermy(panel, 'images/enermy1.png',
+               450 + (i * 150), 250, 20, 20));
+         }
+      }, 1000 * 6);
+      
+      setInterval(function() {
+
+         for (var i = 0; i < 3; i++) {
+            Enermys.push(new Enermy(panel, 'images/enermy1.png',
+               400 + (i * 150), 250, 20, 20));
+         }
+      }, 1000 * 3);
+      
+      for (var i = 0; i < 3; i++) {
+         Enermys.push(new Enermy(panel, 'images/enermy1.png',
+            350 + (i * 150), 250, 20, 20));
+      }
+
+
+      //       keydown() - 키보드가 눌러질 때 발생
+      //       keypress() - 글자가 입력될 때 발생
+      //       keyup() - 키보드가 떼어질 때 발생
+
+      document.body.onkeydown = function(e) {
+
+         if (e.keyCode == 37)
+            ship.movex = -5;
+         if (e.keyCode == 39)
+            ship.movex = 5;
+         if (e.keyCode == 32) {
+            if (ship.mode == 1) {
+            var x = ship.x + 16;
+            var y = ship.y - 5;
+            Bullets.push(new Bullet(panel, x, y));
+            }
+            
+            else if (ship.mode ==2) {
+
+               var x = ship.x;
+               var y = ship.y - 5;
+               Bullets.push(new Bullet(panel, x, y));
+               
+               var x = ship.x + 32;
+               var y = ship.y - 5;
+               Bullets.push(new Bullet(panel, x, y));                              
+            }
+            
+            else if (ship.mode ==3) {
+
+               var x = ship.x;
+               var y = ship.y - 5;
+               Bullets.push(new Bullet(panel, x, y));
+               
+               
+               var x = ship.x + 16;
+               var y = ship.y - 5;
+               Bullets.push(new Bullet(panel, x, y));   
+               
+               var x = ship.x + 32;
+               var y = ship.y - 5;
+               Bullets.push(new Bullet(panel, x, y));                              
+            }
+         }
+      }
+
+      document.body.onkeyup = function(e) {
+
+         if (e.keyCode == 37 || e.keyCode == 39)
+            ship.movex = 0;
+      }
+
+
+
+
+
+      // 
+      var id = setInterval(function() {
+
+         ship.move();
+
+         // 우리편 미사일 발사
+         for (var i in Bullets) {
+
+            Bullets[i].move(); // 미사일 이동
+            bulletRemover(panel, Bullets[i]); // 미사일 사라짐
+
+            for (var j in Enermys) {
+               var result = hitTest(Bullets[i], Enermys[j]);
+
+               if (result == true) {
+                  alert('퇴근입니다. 지금 바로 집에 가시오~~');
+                  clearInterval(id);
+
+               }      
+               
+            }
+         }
+         // 상대편 미사일 발사
+         for (var i in BulletsE) {
+
+            BulletsE[i].moveE(); // 미사일 이동
+            bulletRemoverE(panel, BulletsE[i]); // 미사일 사라짐
+
+            var result = hitTestE(BulletsE[i], ship); // 히트됨
+
+            if (result == true) {
+               alert('야근입니다. 지금 바로 저녁을 주문하세요~~');
+               clearInterval(id);
+
+            }
+
+         }
+
+         // 아이템 발사
+         for (var i in BulletsI) {
+
+            BulletsI[i].moveI(); // 미사일 이동
+            bulletRemoverI(panel, BulletsI[i]); // 미사일 사라짐
+
+            var result = hitTestI(BulletsI[i], ship); // 히트됨
+
+            if (result == true) {
+               
+               if (ship.mode == 1) {
+                  ship.mode =2;
+               setTimeout(function() {               
+                  ship.mode =1;                                 
+               }, 1000 * 20)
+               }
+               
+               else if (ship.mode == 2) {
+                  ship.mode =3;
+               setTimeout(function() {               
+                  ship.mode =2;                                 
+               }, 1000 * 20)
+                  setTimeout(function() {               
+                  ship.mode =1;                                 
+               }, 1000 * 20)            
+            
+               
+               } // else if 종료
+
+         
+         } // if 종료
+         }
+
+
+      // 게임 클리어
+      //          if (Enermys.length == 0) {
+      //             alert('퇴근하시오');
+      //             clearInterval(id);
+      //          }
+      }, 1000 / 60);
+
+      // 상대편 미사일 생성   
+      var idE = setInterval(function() {
+
+         for (var i in Enermys) {
+
+            var x = Enermys[i].x + 5;
+            var y = Enermys[i].y - 5;
+            BulletsE.push(new BulletE(panel, x, y));
+         }
+
+      }, 5000);
+
+      // 우리편 아이템 생성   
+      var idI = setInterval(function() {
+
+         // var x = Math.round(Math.random() * 1000);
+         var x = 50;
+         var y = 15;
+
+         BulletsI.push(new BulletI(panel, x, y));
+
+      }, 1000 * 5);
+
+
+   } // 윈도우 종료
+</script>
+<style type="text/css">
+#panel {
+   width: 1100px;
+   height: 800px;
+   background-image: url('images/bg.png');
+}
+</style>
+</head>
+<body>
+   <div id="panel"></div>
+</body>
+</html>

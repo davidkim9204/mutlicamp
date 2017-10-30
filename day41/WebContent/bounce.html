@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+	function Ball(panel) {
+		this.span = document.createElement("span");
+		this.x = 300;
+		this.y = 670;
+		this.width = 128;
+		this.height = 128;
+		this.span.style.left = this.x + 'px';
+		this.span.style.top = this.y + 'px';
+		this.span.style.width = '128px';
+		this.span.style.height = '128px';
+		this.span.style.backgroundImage = 'url(./images/ball.png)';
+		this.span.style.position = 'absolute';
+		panel.appendChild(this.span);
+		this.movex = 0;
+		this.angle = 0;
+		this.moveAngle = 0;
+		
+		
+		this.jumpUp = false;
+		this.jumpDown = false;
+		this.canJumping = true;
+	}
+	Ball.prototype.move = function() {
+		this.angle += this.moveAngle;
+		this.span.style.transform = 'rotate('+ this.angle +'deg)';
+		if (this.x > 20 && this.x < 1050) {
+			this.x += this.movex;
+			this.span.style.left = this.x + 'px';
+		} else if (this.x <= 20)
+			this.x += 5;
+		else
+			this.x -= 5;
+		
+		if( this.jumpUp){
+			this.canJumping = false;
+			this.y -= 5;
+			if(this.y < 470 )
+			{
+				this.jumpUp = false;
+				this.jumpDown = true;
+			}
+			this.span.style.top = this.y + 'px';
+		}
+		if( this.jumpDown){
+			this.y += 5;
+			if(this.y > 670 )
+			{
+				this.jumpUp = false;
+				this.jumpDown = false;
+				this.canJumping = true;
+			}
+			this.span.style.top = this.y + 'px';
+		}
+		
+	};
+	window.onload = function() {
+		var panel = document.getElementById('panel');
+		var ball = new Ball(panel);
+		document.body.onkeydown = function(e) {
+// 			alert(e.keyCode);
+			if( e.keyCode == 37 ){
+				ball.moveAngle = -5;				
+				ball.movex = -5;
+			}
+			if( e.keyCode == 39){
+				ball.moveAngle = 5;
+				ball.movex = 5;
+			}
+			if( e.keyCode == 32 ){
+				if(ball.canJumping){
+					ball.jumpUp = true;
+				}
+			}
+		}
+		document.body.onkeyup = function(e) {
+			if( e.keyCode == 37 )
+			{
+				ball.moveAngle = 0;				
+				ball.movex = 0;
+			}
+			if( e.keyCode == 39)
+			{
+				ball.moveAngle = 0;
+				ball.movex = 0;
+			}
+			if( e.keyCode == 32 ){
+				
+			}
+		}
+		setInterval(function() {
+			ball.move();
+		}, 1000/60);
+	}
+</script>
+<style type="text/css">
+#panel {
+	width: 1200px;
+	height: 800px;
+	background-color: pink;
+}
+</style>
+</head>
+<body>
+	<div id="panel"></div>
+</body>
+</html>

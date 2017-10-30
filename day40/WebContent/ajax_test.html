@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	window.onload = function(){
+		var btn = document.getElementById('btn');
+		btn.onclick = function(){
+			var select = document.getElementById('select');
+			//1. ajax담당하는 객체를 생성(XMLHttpRequest)
+			var request = new XMLHttpRequest();
+			//2. 목적지에 대한 정보 세팅( 1 객체의 open함수 사용 )
+			request.open('post', 'ajaxTest.do');
+			//3. 응답을 받았을때 할 함수를 정의(이벤트처리마냥) 
+// 			(onreadystatechange속성)
+			request.onreadystatechange = function(){
+				//응답은.. 요기에서 적절하게 조건문을 이용해 얻을 수 있는데,
+				if( request.readyState == 4 && request.status == 200 ){
+// 					alert(request.responseText);	
+// 					var result = request.responseXML;
+// 					var student = result.getElementsByTagName('student')[0];
+// 					var childs = student.childNodes;
+// 					for(var i = 0; i < childs.length; i++)
+// 						alert(childs[i].textContent);
+// 					alert(request.responseText);
+					var result = JSON.parse(request.responseText);
+					alert(result.student.name);
+					alert(result.student.age +1);
+					alert(result.student.score);
+				}
+			};
+			request.setRequestHeader('Content-type', 
+					'application/x-www-form-urlencoded; charset=UTF-8');
+			//4. 전송!!!
+			request.send();
+		};
+	};
+</script>
+</head>
+<body>
+	<select id="select">
+		<option value="1">가위</option>
+		<option value="2">바위</option>
+		<option value="3">보</option>
+	</select>
+	<input type="button" id="btn" value="선택">
+</body>
+</html>

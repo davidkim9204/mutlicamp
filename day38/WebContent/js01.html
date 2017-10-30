@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+// 	child.document.write('<h1>Hello</h1>');
+// 	setTimeout(function(){
+// 		var child = window.open('http://www.naver.com'
+// 			,'','width=300,height=200');
+		
+// 		var id = setInterval(function(){
+// 			child.moveBy(10, 10);
+// 		}
+// 			,100	
+// 		);
+// 		setTimeout(function(){
+// 			clearInterval(id);
+// 		}, 1000);
+// 	}, 3000);
+	
+// 	alert(screen.width);//현재 너비
+// 	alert(screen.height);//현재 높이
+// 	alert(screen.availWidth);//가용 최대 너비
+// 	alert(screen.availHeight);//가용 최대 높이
+// 	alert(screen.pixelDepth);//한 픽셀당 비트 수
+// 	alert(screen.colorDepth);//사용가능한 색상수
+// 	alert("시점1");
+	window.onload = function(){
+// 		var header = document.createElement('h1');//요소노드 생성
+// 		document.body.appendChild(header);
+// 		//텍스트 노드 생성
+// 		var textNode = document.createTextNode('Hello World');
+// 		document.body.appendChild(textNode);
+
+// 		var img = document.createElement('img');
+// 		img.src = 'back.png';
+// 		img.width = 150;
+// 		img.height = 300;
+// 		document.body.appendChild(img);
+
+
+
+// 		var output = '';
+// 		output += '<ul>';
+// 		output += '	<li>JavaScript</li>';
+// 		output += '	<li>jQuery</li>';
+// 		output += '	<li>Ajax</li>';
+// 		output += '</ul>';
+// 		document.body.innerHTML = output;
+// 		document.body.innerHTML += '<h1>Dcument Object Model</h1>'
+	
+	
+// 		var header1 = document.getElementById('header-1');
+// 		var header2 = document.getElementById('header-2');
+// 		header1.innerHTML='여기는 헤더1이여';
+// 		header2.innerHTML='여기는 헤더2고';
+// 		var headers= document.getElementsByTagName('h1');
+// 		for(var i = 0; i < headers.length; i++){
+// 			headers[i].innerHTML='header' + i;
+// 		}
+// 		var hello = document.getElementById('hello');
+// 		hello.style.position = 'absolute';
+// 		var helloX = 0;
+// 		var helloY = 0;
+// 		var intervalId = setInterval(
+// 				function(){
+// 					helloX+=10;
+// 					helloY+=10;
+// 					hello.style.left = helloX + 'px';
+// 					hello.style.top = helloY + 'px';
+// 				}, 100);
+		
+// 		setTimeout(function(){
+// 			clearInterval(intervalId);
+// 		},5000);
+// 		hello.style.left = 100 + 'px';
+// 		hello.style.top = 500 + 'px';
+
+		window.onload = function(){
+			var sun = document.getElementById('sun');
+			var earth = document.getElementById('earth');
+			var moon = document.getElementById('moon');
+
+			sun.style.position = 'absolute';
+			earth.style.position = 'absolute';
+			moon.style.position = 'absolute';
+			sun.style.left = 250 + 'px';
+			sun.style.top = 200 + 'px';
+
+			var earthAngle = 0;
+			var moonAngle = 0;
+
+			setInterval(function(){
+
+				var earthLeft = 250 + 150 * Math.cos(earthAngle);
+				var earthTop = 200 + 150 * Math.sin(earthAngle);
+
+				var moonLeft = earthLeft + 50 * Math.cos(moonAngle);
+				var monnTop = earthTop + 50 * Math.sin(moonAngle);
+
+				earth.style.left = earthLeft + 'px';
+				earth.style.top = earthTop + 'px';
+				moon.style.left = moonLeft + 'px';
+				moon.style.top = monnTop + 'px';
+
+				earthAngle += 0.1;
+				moonAngle += 0.3;
+			},1000/60);
+		};
+
+
+	};
+</script>
+</head>
+<body>
+
+	<!-- <h1 id="hello">Hello</h1> -->
+
+	<h1 id = "sun">@</h1>
+	<h1 id = "earth">+</h1>
+	<h1 id = "moon">*</h1>
+</body>
+</html>
+
+
+
+
+
+
+
+

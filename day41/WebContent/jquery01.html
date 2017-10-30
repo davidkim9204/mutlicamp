@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+	crossorigin="anonymous"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+// 		setInterval(function() {
+// 			$('h1').toggleClass('high-light');
+// 		}, 500);
+// 		setTimeout(function() {
+// 			$('h1').removeClass('high-light');
+// 		}, 1000);
+
+		$('h1').each(function(index, item){
+			$(item).addClass('high-light-' + index);
+		});
+	});
+</script>
+<style type="text/css">
+	.high-light-0{
+		background-color:yellow; 
+	}
+	.high-light-1{
+		background-color:orange; 
+	}
+	.high-light-2{
+		background-color:blue; 
+	}
+	.high-light-3{
+		background-color:green; 
+	}
+	.high-light-4{
+		background-color:red; 
+	}
+</style>
+</head>
+<body>
+	<h1>item-0</h1>
+	<h1>item-1</h1>
+	<h1>item-2</h1>
+	<h1>item-3</h1>
+	<h1>item-4</h1>
+</body>
+</html>

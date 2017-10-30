@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	window.onload= function(){
+		var form = document.getElementById('my-form');
+// 		form.onsubmit=function(){
+// 			return false;
+// 		}
+		var btn = document.getElementById('btn');
+		btn.onclick = function(){
+			alert('doSomething');
+			return false;
+		}
+	}
+</script>
+</head>
+<body>
+	<form action="http://www.naver.com" id="my-form">
+		<button id="btn">버튼</button>
+		<input type="submit" value="서밋">
+	</form>
+</body>
+</html>

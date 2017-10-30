@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#wrapper{
+	width: 100%;
+	height: 700px;
+/* 	background: pink; */
+	background-image: url("images/bg.jpg");
+	background-size: 100%;
+}
+#content {
+	/* 		background: pink; */
+ 	width: 100%; 
+	height: 650px;
+}
+
+#footer {
+/* 	background: red;  */
+	width: 100%; 
+	height: 50px;
+}
+</style>
+<script type="text/javascript">
+
+	function GameText(content, text, texts){
+		//그때그때 getElement해도되지만 매개변수로 와주면 더 좋겠따.
+		this.content = content;
+		this.body = document.createElement("span");
+		this.x = Math.round(Math.random() * 1000);
+		this.y = 15;
+		this.body.style.background = 'pink';
+		this.body.style.border = '2px solid black';
+		this.body.style.fontSize = '22pt';
+		this.body.style.position = 'absolute';
+		this.body.style.left = this.x + 'px';
+		this.body.style.top = this.y +'px';
+		this.body.innerHTML = text;
+		this.text = text;
+		this.content.appendChild(this.body);
+		this.texts = texts;
+	};
+	GameText.prototype.move = function(){
+		this.y += 15;
+		this.body.style.top = this.y +'px';
+		if( this.y > 700){
+			this.remove();
+		}
+	}
+	GameText.prototype.remove = function(){
+		this.content.removeChild(this.body);
+		var myIdx = this.texts.indexOf(this);
+		this.texts.splice(myIdx, 1);
+	}
+
+	window.onload = function(){
+		var inputBtn = document.getElementById('inputBtn');
+		inputBtn.onclick = function(){
+			//여기서 inputText id를 갖는 문서객체 탐색해서
+			//value를 획득하세요
+			//1. 획득한 값 alert띄워보세요
+			//2. texts 배열을 한바퀴 탐색하시오
+			//3. 탐색 중에 texts노드의 text속성값이 1에서 획득한값과 같은지비교
+			var inputText = document.getElementById('inputText');
+			var inputVal = inputText.value;
+// 			alert(texts[0].text);
+			for ( var i in texts ){
+				if( inputVal === texts[i].text ){
+// 					texts.splice(i,1);
+					texts[i].remove();
+				}
+			}
+			inputText.value='';
+		};
+		inputText.onkeydown = function(e){
+// 			alert('?');
+// 			alert(e.keyCode);
+			if( e.keyCode == 13 ){
+				inputBtn.onclick();
+			}
+		}
+		
+		var content = document.getElementById('content');
+		
+// 		var text1 = new GameText(content, '감자');
+// 		var text2 = new GameText(content, '고구마');
+		var texts = [];
+// 		texts.push(new GameText(content, '감자'));
+// 		texts.push(new GameText(content, '고구마'));
+// 		texts.push(new GameText(content, '녹차'));
+
+		setInterval(function(){
+			var words = ['감자','고구마','녹차','염소','댕댕이'];
+			var sel = words[Math.round(Math.random() * (words.length-1))];
+			texts.push(new GameText(content, sel,texts));
+		}, 1000);
+		setInterval(function() {
+// 			text1.move();
+// 			text2.move();
+			for( var i in texts ){
+				texts[i].move();
+			}
+// 			console.log(texts.length);
+		}, 100);
+	}
+</script>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="content"></div>
+		<div id="footer" align="center">
+			<input id="inputText" type="text" size="20" >
+			<input id="inputBtn" type="button" value="입력">
+		</div>
+	</div>
+</body>
+</html>

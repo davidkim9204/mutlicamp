@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function hitTest(me, target){
+		var a = me.x // → a
+		var b = me.y //→  b
+		var c = me.x + me.width // → c
+		var d = me.y + me.height //→  d
+		var e = target.x //→  e
+		var f = target.y //→  f
+		var g = target.x + target.width //→  g
+		var h = target.y + target.height //→  h
+		if( c >= e && a <= g && b <= h && d >= f ){
+			panel.removeChild(me.span);
+			var myIdx = bullets.indexOf(me);
+			bullets.splice(myIdx, 1);
+			
+			panel.removeChild(target.span);
+			var myIdx = enermys.indexOf(target);
+			enermys.splice(myIdx, 1);
+			return true;
+		}
+		return false;
+	}
+
+	function Ship(panel){
+		this.shootable = true;
+		this.ship = document.createElement("span");
+		this.x = 536;
+		this.y = 750;
+		this.width = 32;
+		this.height = 32;
+		this.ship.style.left = this.x +'px';
+		this.ship.style.top = this.y +'px';
+		this.ship.style.width = '32px';
+		this.ship.style.height = '32px';
+		this.ship.style.backgroundImage = 'url(./images/ship.png)';
+		this.ship.style.position = 'absolute';
+		panel.appendChild(this.ship);
+		this.movex = 0;
+		this.move = function(){
+			if( this.x > 20 && this.x < 1050){
+				this.x += this.movex;
+				this.ship.style.left = this.x +'px';			
+			}
+			else if( this.x <= 20)
+				this.x += 5;
+			else
+				this.x -= 5;
+		}
+	}
+	
+	function Ship2(panel){
+		this.shootable = true;
+		this.ship = document.createElement("span");
+		this.x = 536;
+		this.y = 750;
+		this.speed = 0;
+		this.angle= 0;
+		this.moveAngle = 0;
+		this.width = 32;
+		this.height = 32;
+		this.ship.style.left = this.x +'px';
+		this.ship.style.top = this.y +'px';
+		this.ship.style.width = '32px';
+		this.ship.style.height = '32px';
+		this.ship.style.backgroundImage = 'url(./images/ship.png)';
+		this.ship.style.position = 'absolute';
+		this.valX=0;
+		this.valY=0;
+		panel.appendChild(this.ship);
+		this.move = function(){
+			if( this.valX < this.speed*15)
+				this.valX++;
+			else
+				this.valX--;
+			if(this.valY <this.speed*15)
+				this.valY++;
+			else
+				this.valY--;
+			
+			this.angle += this.moveAngle;
+			rad = this.angle * Math.PI / 180;
+			this.x += this.valX/15 * Math.sin(rad);
+			this.y += this.valY/15 * Math.cos(rad)*-1;
+			this.ship.style.left = this.x +'px';		
+			this.ship.style.top = this.y +'px';
+			this.ship.style.transform = 'rotate('+ this.angle +'deg)'
+// 			if( this.x > 20 && this.x < 1050){
+// 				this.x += this.movex;
+// 				this.ship.style.left = this.x +'px';			
+// 			}
+// 			else if( this.x <= 20)
+// 				this.x += 5;
+// 			else
+// 				this.x -= 5;
+		}
+	}
+	
+	//벌레 생성자(킹32,32 , 쫄따20,20)
+	function Enermy(panel, src, left, top, width, height){
+		this.span = document.createElement("span");
+		this.x = left;
+		this.y = top;
+		this.width = 32;
+		this.height = 32;
+		this.span.style.left = this.x +'px';
+		this.span.style.top = this.y +'px';
+		this.span.style.width = width + 'px';
+		this.span.style.height = height + 'px';
+		this.span.style.backgroundImage = 'url('+ src +')';
+		this.span.style.position = 'absolute';
+		panel.appendChild(this.span);
+	}
+	
+	function Bullet(panel, left, top){
+		this.span = document.createElement("span");
+		this.x = left;
+		this.y = top;
+		this.width = 7;
+		this.height = 17;
+		this.span.style.left = this.x +'px';
+		this.span.style.top = this.y +'px';
+		this.span.style.width = this.width + 'px';
+		this.span.style.height = this.height + 'px';
+		this.span.style.backgroundImage = 'url(./images/bullet.png)';
+		this.span.style.position = 'absolute';
+		
+		panel.appendChild(this.span);
+		this.move = function(){
+			this.y -= 5;
+			this.span.style.top = this.y +'px';
+		}
+	}
+	
+	function bulletRemover(panel, bullet){
+		if( bullet.y < 0 )
+		{
+			panel.removeChild(bullet.span);
+			var myIdx = bullets.indexOf(bullet);
+			bullets.splice(myIdx, 1);
+// 			console.log(bullets.length);
+			return true;
+		}
+		return false;
+	}
+	
+	
+	var enermys = [];
+	var bullets = [];
+	window.onload=function(){
+		var panel = document.getElementById('panel');
+		var ship = new Ship2(panel);
+		
+		for( var i = 0; i < 10; i++){
+			enermys.push(new Enermy(panel, './images/green_king.png', 
+					50 + (i*50), 50, 32, 32));
+		}
+		for( var i = 0; i < 10; i++){
+			enermys.push(new Enermy(panel, './images/blue_king.png', 
+					550 + (i*50), 50, 32, 32));
+		}
+		for( var i = 0; i < 10; i++){
+			enermys.push(new Enermy(panel, './images/enermy1.png', 
+					50 + (i*50), 100, 20, 20));
+		}
+		for( var i = 0; i < 10; i++){
+			enermys.push(new Enermy(panel, './images/enermy2.png', 
+					550 + (i*50), 100, 20, 20));
+		}
+		
+		document.body.onkeydown = function(e){
+// 			alert(e.keyCode);	
+			if( e.keyCode == 37 )
+				ship.moveAngle = -5;
+			if( e.keyCode == 39)
+				ship.moveAngle = 5;
+			if( e.keyCode == 38 )
+				ship.speed = 10;
+
+
+// 			if( e.keyCode == 37 )
+// 				ship.movex = -5;
+// 			if( e.keyCode == 39)
+// 				ship.movex = 5;
+			if( e.keyCode == 32 )
+			{
+				if(ship.shootable){
+					var x = ship.x+16;
+					var y = ship.y - 5;
+					bullets.push(new Bullet(panel, x, y));
+					ship.shootable = false;
+					setTimeout(function() {
+						ship.shootable = true;
+					}, 500);
+				}
+			}
+		}
+		document.body.onkeyup = function(e){
+// 			if( e.keyCode == 37 || e.keyCode == 39)
+// 				ship.movex = 0;
+			
+			if( e.keyCode == 37 )
+				ship.moveAngle = 0;
+			if( e.keyCode == 39)
+				ship.moveAngle = 0;
+			if( e.keyCode == 38 ){
+				ship.speed = 0;
+			}
+		}
+		
+		
+		
+		var id = setInterval(function() {
+			ship.move();
+			
+			for( var i in bullets )
+			{
+				bullets[i].move();
+				result = bulletRemover(panel, bullets[i]);
+				if(result)
+					continue;
+				for( var j in enermys ){
+					result = hitTest(bullets[i], enermys[j]);
+					if(result)
+						break;
+				}
+			}
+			if( enermys.length == 0 ){
+				alert('Clear!!!');
+				clearInterval(id);			
+			}
+		}, 1000/60);
+	}
+</script>
+<style type="text/css">
+	#panel{
+		width: 1100px;
+		height: 800px;
+		background-image: url('images/bg.png');
+	}
+	
+</style>
+</head>
+<body>
+	<div id="panel">
+	</div>
+</body>
+</html>

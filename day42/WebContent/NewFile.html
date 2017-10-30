@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style media="screen">
+#box {
+	width: 700px;
+	height: 442px;
+	border: 2px solid grey;
+	margin: auto;
+}
+
+#pos_text {
+	text-align: center;
+}
+
+#accept {
+	width: 120px;
+	height: 60px;
+	border: 1px blue solid;
+	background-color: grey;
+	margin-left: auto;
+	margin-top: 10px;
+	margin-right: auto;
+}
+
+#fish {
+	width: 200px;
+	position: relative;
+}
+</style>
+<input type="button" value="게임 시작하기" id="startGame">
+<div id="box">
+	<img id="fish"
+		src="http://cfile6.uf.tistory.com/image/2637484856B21E3332B223"
+		alt="fish" />
+</div>
+<div id="pos_text">
+	경과 시간: <span id="time">0</span><br /> 점수:<span id="point">0</span><br />
+</div>
+<SCRIPT
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
+	type="text/javascript"></SCRIPT>
+<script type="text/javascript">
+	var x = 250;
+	var y = 150;
+	var point = 0;
+	var timer = 0;
+	var objectiveX = 100;
+	var objectiveY = 100;
+	$('#fish').css('display', 'none'); getPoint(); started();
+	function getPoint() {
+		$('#fish').click(function() {
+			point++; $('#point').html(point)
+		});
+	}
+	function started() {
+		$('#startGame').click(function() {
+			started_init();
+			a = setInterval(function() {
+				started_timer(); started_moving(); console.log(Math.atan2(objectiveY - y, objectiveX - x));
+			}, 20); setTimeout(function() {
+				end_init();
+			}, 1000 * 10)
+		});
+		function started_init() {
+			$('#fish').css('display', ''); $('#startGame').css('display', 'none'); $('#point').html(point)
+		}
+		function started_timer() {
+			timer++; $("#time").html(Math.floor(timer / 50))
+		}
+		function started_moving() {
+			if ((x - objectiveX) * (x - objectiveX) + (y - objectiveY) * (y - objectiveY) < 30) {
+				objectiveX = 500 * Math.random();
+				objectiveY = 300 * Math.random();
+			}
+			var angle = Math.atan2(objectiveY - y, objectiveX - x);
+			x += 10 * Math.cos(angle);
+			y += 10 * Math.sin(angle);
+			if (500 < x) {
+				x = 500;
+			} else if (0 > x) {
+				x = 0;
+			} else if (y > 300) {
+				y = 300;
+			} else if (y < 0) {
+				y = 0;
+			}
+			$('#fish').css({
+				left : x,
+				top : y,
+			});
+		}
+	}
+	function end_init() {
+		$('#fish').css('display', 'none'); $('#startGame').css('display', '');
+		timer = 0;
+		point = 0;
+		x = 250;
+		y = 150; clearInterval(a);
+	}
+</script>
+
+</head>
+<body>
+
+</body>
+</html>
