@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+// 	alert('내장함수');
+// 	var name = prompt('이름을 입력하세요.');
+// 	alert('너 님의 이름은 ' + name + '이군요?');	
+
+
+
+	/* 	function f(x){
+			return x * x;
+		}
+		alert(  f(3,2,1) ); */
+
+	// 	alert("나 되나 ? ");
+
+	/* 	function sumAll(){
+			alert(arguments.length);
+			var output = 0;
+			for( var i = 0; i < arguments.length; i++ )
+				output += arguments[i];
+			alert(output);
+		}	
+		sumAll(1,2,3);
+	*/
+
+	/* 
+	 	function returnFunction(){
+	 		return;
+	 		alert('출력되는지?');
+	 	}
+	 	var output = returnFunction();
+	 	alert(output);
+
+	 */
+
+	/* 	 
+		alert = 10;
+	 	alert("???");
+	 */
+
+	// 함수 안에서 변수를 접근할 때 지역 변수가 있으면 지역변수 우선 접근.
+/* 
+	function a() {
+		alert('I`m a()');
+	}
+	function func() {
+		alert('I`m a() again');
+	}
+	function func() {
+		a();
+		function a() {
+			alert('내부에도 a()가 있다면');
+		}
+	}
+	func();
+ */
+//a = 3;
+//a(); 
+
+	/*
+		function func(x) {
+			// 함수 호출 매개변수가 문자열 일 때
+			//alert("니이름은 " + x);
+			
+			//함수 호출 매개변수가 boolean 일 때
+	 		//if (x)
+			//	alert("참이오");
+			
+			if (x instanceof Array) {
+				for (var i in x)
+					alert(x[i]);
+			}
+		}
+		//func(true);
+		func([ 1, 2, 3, 4, 5 ]);
+		 */
+/* 
+	function callFiveTimes(callback) {
+		for (var i = 0; i < 5; i++)
+			callback();
+	}
+		 
+	var myFunc = function() {
+		alert('안녕');
+	}
+	
+	function myFunc() {
+		alert('안녕');
+	}
+	 
+	callFiveTimes(myFunc); */
+
+	//두 수를 받아서 덧셈결과를 리턴하는 함수를 만드세요 add
+//두 수를 받아서 곱셈결과를 리턴하는 함수를 만드세요 mult
+//특정함수와 두 수를 받아서 해당함수를 호출(두수전달)한 후 반환값을 
+//alert하는 함수를 만드세요 print
+/* 
+		function add( x, y ){
+	 		return x + y;
+	 	}
+	 	function mult( x , y ){
+	 		return x * y;
+	 	}
+	 	function print( func, x , y ){
+	 		var result = func(x,y);
+	 		alert(result);
+	 	}
+	 	print( add, 2,3 );
+ */
+
+	/* 
+			function returnFunction(){
+				var myFunc = function(){
+					alert('Hello, This is return function');
+				}
+				alert('호출됨');
+				return myFunc;
+			}
+			var returnValue = returnFunction();
+			returnValue();
+	  */
+
+
+	// ---------------------- JavaScript 클로저 --------------------
+/* 
+	var myFunc = function(){
+		var hello = "Hello World.";
+		var inner = function(){
+			alert(hello);
+		};
+		return inner;
+	}
+	var a = myFunc();
+	var b = myFunc();
+	a();
+	b();
+ */
+
+	/* 	 
+			function test(name){
+				var output = 'Hello ' + name + '..!';
+				return function(){
+					alert(output)
+				};
+			}
+			var test_1 = test('Java Script');
+			var test_2 = test('Web');
+			//test함수 종료됐으니 지역변수 output이 소멸됐어야함
+			test_1();
+			test_2(); 
+		 */
+
+
+	/* 	 
+			var sequencer = function(){
+				var s = 0;
+				return function(){
+					return ++s;
+				}
+			}
+			var seq1 = sequencer();
+			//var num = seq1();
+			//alert(num)
+			var seq2 = sequencer();
+			seq1();
+			seq1();
+			var num1 = seq1();
+			seq2();
+			var num2 = seq2();
+			alert(num1);
+			alert(num2);
+	 */
+
+
+	//	(function() {})();
+
+
+	function outer() {
+		var output = [];
+		for (var i = 0; i < 3; i++) {
+// 			output[i] = function() {
+// 				alert(i);
+// 			}
+// 			(function(idx) {
+// 				output[idx] = function() {
+// 					alert(idx);
+// 				}
+// 			})(i);
+
+			output[i] = (function(idx) {
+				return function() {
+					alert(idx);
+				};
+			})(i);
+		}
+		return output;
+	}
+	var returnVal = outer();
+	returnVal[0]();
+	returnVal[1]();
+	returnVal[2]();
+</script>
+</head>
+<body>
+	<input id="myinput" type="text">
+</body>
+</html>
