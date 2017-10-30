@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+// 	var arr = ['사과', '딸기', '바나나'];
+// 	var obj = {
+// 		이름 : '홍승길',
+// 		나이 : 24,
+// 		직업 : '알바'
+// 	};
+
+// 	var obbaCha = {
+// 		speed : 100,
+// 		mileage : 5000,
+// 		color : 'Blue',
+// 		speedUp : function(){
+// 			alert(this.speed);
+// 			alert('오빠차 달려');
+// 			//this.speed += 100
+// 		}
+// 	};
+// 	//obbaCha.speedUp()
+// 	//obbaCha.speedUp()
+	
+	
+// 	//in 연산자는 반복문 반복을 돌기 위해서도 사용되지만
+// 	//해당 객체에 속성이 존재하는지 확인하기 위해서도 사용
+// // 	alert('color' in obbaCha);//true
+// // 	alert('name' in obbaCha);//false
+
+// 	for( var key in obbaCha ){
+// 		output += key +' : ' + obbaCha[key] + '\n';
+// 		alert(output);
+// 	}
+	
+
+// 	var student = {
+// 		이름 : '홍승길',
+// 		국어 : 92,
+// 		영어 : 80,
+// 		수학 : 100
+// 	};
+// 	var output = '';
+// 	with(student){
+// 		output += '이름 : ' + 이름 + '\n';
+// 		output += '국어 : ' + 국어 + '\n';
+// 		output += '영어 : ' + 영어 + '\n';
+// 		output += '수학 : ' + 수학 + '\n';
+// 	}
+// 	output += '이름 : ' + student.이름 + '\n';
+// 	output += '국어 : ' + student.국어 + '\n';
+// 	output += '영어 : ' + student.영어 + '\n';
+// 	output += '수학 : ' + student.수학 + '\n';
+// 	window.alert(output);
+	
+	//객체의 속성을 동적으로 추가/삭제하기
+// 	var student = {};
+// 	student.name = '홍승길';
+// 	student.age = 24;
+// 	student.toString = function(){
+// 		var output = '';
+// 		output += '이름 : ' +  this.name + '\n';
+// 		output += '나이 : ' + this.age + '\n';
+// 		return output;
+// 	}
+// 	alert(student.toString());
+// 	delete(student.age);//객체 속성을 삭제.
+// 	alert(student);//toString안써도 알아서 나옴
+	
+// 	var students = [];
+// 	//배열에 동적으로 요소를 추가하는 방법은
+// 	students.push({name:'홍승길', kor:80,eng:80,math:90});
+// 	students.push({name:'홍승길2', kor:81,eng:81,math:72});
+// 	students.push({name:'홍승길3', kor:82,eng:84,math:80});
+// 	students.push({name:'홍승길4', kor:83,eng:83,math:50});
+// 	students.push({name:'홍승길5', kor:84,eng:82,math:93});
+	
+// 	for( var i in students ){
+// 		students[i].getSum = function(){
+// 			return this.kor + this.eng + this.math;
+// 		}
+// 	}
+// 	var a = 10;
+// 	alert(window.a);
+
+// 	function makeStudent(n, k, e, m){
+// 		//여기는 무슨공간?
+// 		this.n = '홍';
+// 		var student = {
+// 			name : n,
+// 			kor : k,
+// 			eng : e,
+// 			math : m,
+// 			getSum : function(){
+// 				return this.kor + this.eng + this.math;
+// 			}
+// 		};
+// 		return student;
+// 	}
+// 	var students = [];
+// 	students.push( makeStudent('홍승길',10,20,30) );
+// 	alert(n,k,e,m);
+	
+	
+	
+// 	function Student( n, k, e, m ){
+// 		this.name = n;
+// 		this.kor = k;
+// 		this.eng = e;
+// 		this.math = m;
+// 		this.getSum = function(){
+// 			return this.kor + this.eng + this.math;
+// 		}
+// 	}
+// 	var s = new Student('홍승길', 100,20,30);
+	
+	
+	
+	
+	
+	
+	
+</script>
+</head>
+<body>
+
+</body>
+</html>
